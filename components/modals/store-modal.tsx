@@ -1,5 +1,6 @@
 "use client";
 
+/* Importações */
 import * as z from "zod"; // Biblioteca de Validação
 import axios from "axios";
 import { useForm } from "react-hook-form";
@@ -25,27 +26,31 @@ const formSchema = z.object({
   name: z.string().min(1),
 });
 
+/* Definição do componente `StoreModal` */
 export const StoreModal = () => {
-  const storeModal = useStoreModal();
 
+  /* Estado do componente */
+  const storeModal = useStoreModal();
   const [loading, setLoading] = useState(false);
 
+  /* Validação do formulário */
   const form = useForm<z.infer<typeof formSchema>>({
-    // Estou utilizando as regras do formSchema para validar o formulário com o zodResolver
+    // formSchema valida o formulário com o zodResolver
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
     }, // Defini um valor padrão para o campo `name`
   });
 
-  // Apenas para demonstração
+  /* Tratamento do formulário */
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setLoading(true);
 
       const response = await axios.post('api/stores', values);
 
-      toast.success("Store created.");
+      // Redireciona o usuário para a URL da loja recém-criada
+      window.location.assign(`/${response.data.id}`);
     } catch (error) {
       toast.error("Something went wrong.");
     } finally {
@@ -53,6 +58,7 @@ export const StoreModal = () => {
     }
   }
 
+  /* Renderização do modal */
   return (
     <Modal
       title="Create store"
@@ -100,3 +106,5 @@ export const StoreModal = () => {
     </Modal>
   );
 };
+
+/* O componente StoreModal é um modal de criação de lojas que usa a biblioteca de validação zod para validar o formulário. Ele renderiza um modal usando o componente Modal que é controlado pelo estado do hook useStoreModal. O formulário é tratado pelo hook useForm do React Hook Form, e ao enviar o formulário, os dados são enviados para o servidor usando a biblioteca axios. Se a operação for bem-sucedida, uma notificação de sucesso será exibida usando a biblioteca react-hot-toast, caso contrário, uma notificação de erro será exibida. */
