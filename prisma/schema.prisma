@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Store {
+  id        String    @id @default(uuid())
+  name      String
+  userId    String
+  createAt  DateTime  @default(now())
+  updateAt  DateTime  @updatedAt
+}
+
+// id: Uma string que é a chave primária do modelo, definida com o atributo @id. O valor padrão é gerado como um UUID usando @default(uuid()).
+
+// name: Uma string que representa o nome da loja.
+
+// userId: Uma string que representa o ID do usuário associado à loja.
+
+// createAt: Um campo de data e hora que é definido com @default(now()), o que significa que receberá a data e hora atual quando um novo registro for criado.
+
+// updateAt: Um campo de data e hora que é marcado com @updatedAt, o que significa que será atualizado automaticamente com a data e hora sempre que o registro for modificado.
