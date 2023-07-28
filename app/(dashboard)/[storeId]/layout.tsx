@@ -1,7 +1,11 @@
-import prismadb from "@/lib/prismadb";
+/* Importações */
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
+import prismadb from "@/lib/prismadb";
+import Navbar from "@/components/navbar";
+
+/* Definição da função DashboardLayout */
 export default async function DashboardLayout ({
   children,
   params
@@ -31,7 +35,7 @@ export default async function DashboardLayout ({
   /* Renderização do layout do painel de controle */
   return (
     <>
-      <div>This will be a Navbar</div>
+      <Navbar />
       {children}
     </>
   )
