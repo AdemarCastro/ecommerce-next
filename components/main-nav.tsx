@@ -18,8 +18,13 @@ export function MainNav ({
 
   const routes = [
     {
+      href: `/${params.storeId}`,
+      label: 'Geral',
+      active: pathname === `/${params.storeId}`,
+    },
+    {
       href: `/${params.storeId}/settings`,
-      label: 'Settings',
+      label: 'Configurações',
       active: pathname === `/${params.storeId}/settings`,
     },
     /* Nesta parte, é obtido o caminho da URL atual através do hook usePathname() e os parâmetros da URL através do hook useParams(). Com base nesses valores, é criado um array routes com objetos que representam cada rota. Cada objeto contém o href (o link para a rota), o label (o rótulo exibido para a rota) e o active (um valor booleano que indica se a rota está ativa ou não). */

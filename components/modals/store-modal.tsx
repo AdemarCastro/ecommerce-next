@@ -5,6 +5,7 @@ import * as z from "zod"; // Biblioteca de Validação
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 
@@ -31,6 +32,7 @@ export const StoreModal = () => {
 
   /* Estado do componente */
   const storeModal = useStoreModal();
+
   const [loading, setLoading] = useState(false);
 
   /* Validação do formulário */
